@@ -1,8 +1,0 @@
-[
-{
-  "directory": "D:/utils/rdfile/build",
-  "command": "D:\\program\\LLVM\\bin\\clang-cl.exe  /nologo -TP /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -clang:-std=c++23 -MDd /W4 /permissive- /utf-8 /FoCMakeFiles\\rdfile.dir\\src\\main.cpp.obj /FdCMakeFiles\\rdfile.dir\\ -c -- D:\\utils\\rdfile\\src\\main.cpp",
-  "file": "D:/utils/rdfile/src/main.cpp",
-  "output": "D:/utils/rdfile/build/CMakeFiles/rdfile.dir/src/main.cpp.obj"
-}
-]
