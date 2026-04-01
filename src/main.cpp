@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @author zuudevs (zuudevs@gmail.com)
- * @brief A simple CLI utility for reading files.
+ * @brief A CLI utility for reading files.
  * @version 1.0.0
  * @date 2026-04-01
  * 
@@ -25,7 +25,6 @@ namespace credit {
 }
 
 namespace ansi {
-    // Menggunakan \033 untuk escape character ANSI yang lebih standar
     [[maybe_unused]] constexpr std::string_view black = "\033[0;30m"; 
     [[maybe_unused]] constexpr std::string_view red = "\033[0;31m"; 
     [[maybe_unused]] constexpr std::string_view green = "\033[0;32m"; 
@@ -133,7 +132,7 @@ void show_content(std::string_view filename, bool with_number = false) {
 		while ((pos = line.find('\t')) != std::string::npos) {
 			line.replace(pos, 1, "    ");
 		}
-		
+
         if (with_number) {
             std::println("{}{: >6}{} | {}", 
                 ansi::cyan, 
