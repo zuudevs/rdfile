@@ -9,6 +9,7 @@
  * 
  */
 
+#include <algorithm>
 #include <cstdint>
 #include <print>
 #include <fstream>
@@ -20,7 +21,7 @@ namespace credit {
     [[maybe_unused]] constexpr std::string_view author = "zuudevs";
     [[maybe_unused]] constexpr std::string_view email = "zuudevs@gmail.com";
     [[maybe_unused]] constexpr std::string_view repository = "https://github.com/zuudevs/rdfile.git";
-    [[maybe_unused]] constexpr std::string_view version = "0.1.0";
+    [[maybe_unused]] constexpr std::string_view version = "1.0.0";
 }
 
 namespace ansi {
@@ -45,14 +46,29 @@ std::string colorize(
 }
 
 void print_about() {
-    std::println("{}", colorize("=== About rdfile ===", ansi::purple));
+    std::println(
+		"{}", 
+		colorize("=== About rdfile ===", ansi::purple)
+	);
     std::println("rdfile (Read File) is a simple command line utility");
     std::println("which is designed to read and display the text contents of a file.");
     std::println();
-    std::println("{:<12} {}", "Author:", colorize(credit::author, ansi::blue));
-    std::println("{:<12} {}", "Email:", colorize(credit::email, ansi::blue));
-    std::println("{:<12} {}", "Repository:", colorize(credit::repository, ansi::blue));
-    std::println("{:<12} {}", "Version:", colorize(credit::version, ansi::blue));
+    std::println(
+		"{:<12} {}", "Author:", 
+		colorize(credit::author, ansi::blue)
+	);
+    std::println(
+		"{:<12} {}", "Email:", 
+		colorize(credit::email, ansi::blue)
+	);
+    std::println(
+		"{:<12} {}", "Repository:", 
+		colorize(credit::repository, ansi::blue)
+	);
+    std::println(
+		"{:<12} {}", "Version:", 
+		colorize(credit::version, ansi::blue)
+	);
 }
 
 void print_version() {
@@ -93,7 +109,7 @@ void print_help() {
 	);
     std::println(
 		"  {:<18} Show line numbers", 
-		colorize("-n, --count-line", ansi::cyan)
+		colorize("-n, --number", ansi::cyan)
 	);
 }
 
@@ -113,6 +129,11 @@ void show_content(std::string_view filename, bool with_number = false) {
     uint32_t iter{0};
 
     while (std::getline(file, line)) {
+		size_t pos;
+		while ((pos = line.find('\t')) != std::string::npos) {
+			line.replace(pos, 1, "    ");
+		}
+		
         if (with_number) {
             std::println("{}{: >6}{} | {}", 
                 ansi::cyan, 
@@ -140,7 +161,7 @@ int main(int argc, char* argv[]) {
         print_version();
     } else if (arg1 == "-a" || arg1 == "--about") {
         print_about();
-    } else if (arg1 == "-n" || arg1 == "--count-line") {
+    } else if (arg1 == "-n" || arg1 == "--number") {
         if (argc < 3) {
             std::println(
 				stderr, 
